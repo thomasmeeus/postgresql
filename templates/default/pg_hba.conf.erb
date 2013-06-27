@@ -12,16 +12,7 @@
 # TYPE  DATABASE        USER            ADDRESS                 METHOD
 <% end -%>
 
-# "local" is for Unix domain socket connections only
-<% if node['postgresql']['version'].to_f < 9.1 -%>
-local   all             all                                     ident
-<% elsif node['postgresql']['version'].to_f >= 9.1 -%>
-local   all             all                                     peer
-<% end -%>
 
-###########
-# Other authentication configurations taken from chef node defaults:
-###########
 <% node['postgresql']['pg_hba'].each do |auth| -%>
 
 <%   if auth[:comment] %>
